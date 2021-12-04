@@ -1,15 +1,5 @@
-* {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  font-size: 100%;
-  vertical-align: baseline;
-  background: transparent;
-}
 
 .App {
-  font-family: sans-serif;
   text-align: center;
   display: flex;
   height: 100vh;
@@ -19,25 +9,9 @@
   background: -webkit-linear-gradient(-60deg, #2f7336, #aa3a38); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(-60deg, #2f7336, #aa3a38); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-.App section{
-  background-color: white;
-  padding: 50px;
-}
-form {
-  margin-top: 30px;
-  margin-bottom: 20px;
-}
 
 input {
   border: 1px solid black;
   border-radius: 10px;
   padding: 10px;
-}
-button{
-  margin-left: 10px;
-  background: #aa3a38; 
-  color: white;
-  padding: 10px; 
-  cursor: pointer;
-  
 }
