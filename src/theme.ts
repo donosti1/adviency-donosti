@@ -7,6 +7,9 @@ export default extendTheme({
         color: "whiteAlpha.900",
         backgroundColor: "primary.500",
       },
+      "*::placeholder": {
+        color: "white",
+      },
     },
   },
   colors: {
@@ -42,10 +45,17 @@ export default extendTheme({
         },
       },
     },
-    /* Heading: {
-      baseStyle: {
-        marginTop: 0,
+    Input: {
+      parts: ["field"],
+      defaultProps: {
+        focusBorderColor: "secondary.500",
       },
-    }, */
+    },
+    Text: {
+      baseStyle: {
+        fontWeight: "700",
+        textShadow: "1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;",
+      },
+    },
   },
 });

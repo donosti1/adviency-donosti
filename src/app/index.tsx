@@ -27,7 +27,7 @@ function App() {
       justifyContent="center"
     >
       <Stack
-        backgroundColor="whiteAlpha.300"
+        backgroundColor="whiteAlpha.500"
         borderRadius="3xl"
         boxShadow="rgb(38, 57, 77) 0px 20px 30px -10px"
         padding={8}
