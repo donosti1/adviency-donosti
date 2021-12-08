@@ -100,7 +100,11 @@ export default function AddGift({
                 </FormControl>
               )}
             </Field>
-            <Button isLoading={props.isSubmitting} type="submit">
+            <Button
+              _hover={{ bg: "green.300" }}
+              isLoading={props.isSubmitting}
+              type="submit"
+            >
               Add
             </Button>
           </Stack>

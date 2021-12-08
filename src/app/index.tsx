@@ -1,18 +1,28 @@
 /* import { useState } from "react"; */
 
-import { useState } from "react";
-import { Button, Heading, Stack, Text } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { Button, Heading, Modal, Stack, Text } from "@chakra-ui/react";
 import { sampleGifts } from "./sampleGifts";
 import AddGift from "./components/AddGift";
 import GiftsListItem from "./components/GiftsListItem";
+import { DeleteAllModalScreen } from "./components/DeleteAllModal";
+import { Gift } from "./types";
 
 function App() {
-  const [gifts, setGifts] = useState(() => sampleGifts);
+  const finalRef = React.useRef<HTMLDivElement>(null);
+  const sampleGiftsInit = () => {
+    const savedItems = localStorage.getItem("adviency");
 
-  /*   const handleDeleteItem = (id: number) => {
-    setGifts(gifts.filter((gift) => gift.id != id));
-  }; */
-  console.log(gifts);
+    return savedItems ? JSON.parse(savedItems) : sampleGifts;
+  };
+
+  const [gifts, setGifts] = useState(sampleGiftsInit);
+
+  useEffect(() => {
+    gifts.length
+      ? localStorage.setItem("adviency", JSON.stringify(gifts))
+      : localStorage.removeItem("adviency");
+  }, [gifts]);
 
   return (
     <Stack
@@ -33,36 +43,58 @@ function App() {
         padding={8}
         spacing={4}
       >
-        <AddGift gifts={gifts} setGifts={setGifts} />
-        <Heading as="h1" textAlign="center">
+        <Heading ref={finalRef} as="h1" textAlign="center">
           Regalos
         </Heading>
         <Stack>
           {gifts.length > 0 ? (
-            [
-              gifts.map((gift) => (
-                <GiftsListItem
-                  key={gift.id}
-                  gift={gift}
-                  handleDeleteItem={(id) =>
-                    setGifts(
-                      gifts.filter((gift) => {
-                        return gift.id != id;
-                      })
-                    )
-                  }
-                />
-              )),
+            <Stack key={Date.now()}>
+              <Stack
+                maxHeight="xs"
+                overflowY="auto"
+                paddingRight={4}
+                sx={{
+                  "&::-webkit-scrollbar": {
+                    width: "16px",
+                    borderRadius: "8px",
+                    backgroundColor: `rgba(0, 0, 0, 0.1)`,
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    borderRadius: "8px",
+                    backgroundColor: `rgba(0, 0, 0, 0.4)`,
+                  },
+                }}
+              >
+                {gifts.map((gift: Gift) => (
+                  <GiftsListItem
+                    key={gift.id}
+                    finalRef={finalRef}
+                    gift={gift}
+                    handleDeleteItem={(id: number) =>
+                      setGifts(
+                        gifts.filter((gift: Gift) => {
+                          return gift.id != id;
+                        })
+                      )
+                    }
+                  />
+                ))}
+              </Stack>
+
               <Stack key={Date.now()}>
-                <Button marginTop={8} onClick={() => setGifts([])}>
-                  Delete all gifts
-                </Button>
-              </Stack>,
-            ]
+                <DeleteAllModalScreen
+                  finalRef={finalRef}
+                  modalDescription="Description"
+                  modalTitle="Delete all items"
+                  setGifts={setGifts}
+                />
+              </Stack>
+            </Stack>
           ) : (
             <Text>Add a gift to your wishlist.</Text>
           )}
         </Stack>
+        <AddGift gifts={gifts} setGifts={setGifts} />
       </Stack>
     </Stack>
   );

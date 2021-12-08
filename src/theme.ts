@@ -19,6 +19,7 @@ export default extendTheme({
     },
     secondary: {
       100: "#aa3a38",
+      300: "#e10326",
       500: "#2f7336",
     },
   },
@@ -51,10 +52,23 @@ export default extendTheme({
         focusBorderColor: "secondary.500",
       },
     },
+    Modal: {
+      baseStyle: {
+        dialog: {
+          bg: "whiteAlpha.900",
+        },
+        closeButton: {
+          bg: "gray.500",
+          _hover: { bg: "red.300" },
+        },
+        header: {
+          color: "black",
+        },
+      },
+    },
     Text: {
       baseStyle: {
         fontWeight: "700",
-        textShadow: "1px 1px 2px black, 0 0 1em blue, 0 0 0.2em blue;",
       },
     },
   },
