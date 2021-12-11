@@ -1,12 +1,12 @@
 import { Avatar, Button, Heading, Stack, Text, Input } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import api from "./api";
+import FormModal from "./components/FormModal";
 import { Gift } from "./types";
 
 function App() {
   const [gifts, setGifts] = useState(api.gifts.list);
   const [giftMessage, setGiftMessage] = useState("");
-  /* const [focus, setFocus] = useState(false); */
 
   function handleDeteleItem(id: number) {
     setGifts(
@@ -25,13 +25,13 @@ function App() {
     if (!giftTitle) {
       setGiftMessage("Ingresa un regalo");
 
-      return;
+      return false;
     } else if (
       gifts.some((g: Gift) => g.title.toLowerCase() === giftTitle.toLowerCase())
     ) {
       setGiftMessage("Regalo repetido");
 
-      return;
+      return false;
     }
     const giftQty = e.currentTarget.giftQty.value;
     const giftImgSrc = e.currentTarget.imgSrc.value;
@@ -47,6 +47,8 @@ function App() {
     e.currentTarget.giftTitle.value = "";
     e.currentTarget.giftQty.value = "";
     e.currentTarget.imgSrc.value = "";
+
+    return true;
   }
   useEffect(() => {
     if (gifts.length) {
@@ -55,6 +57,9 @@ function App() {
 
     return localStorage.removeItem("adviency");
   }, [gifts]);
+  function clearGiftInput() {
+    setGiftMessage("");
+  }
 
   return (
     <Stack
@@ -124,11 +129,6 @@ function App() {
                   </Stack>
                 ))}
               </Stack>
-              <Stack key={Date.now()}>
-                <Button onClick={handleDeteleAll}>
-                  Borrar todos los regalos
-                </Button>
-              </Stack>
             </Stack>
           ) : (
             <Stack>
@@ -136,34 +136,16 @@ function App() {
             </Stack>
           )}
         </Stack>
-        <form onSubmit={handleAddGift}>
-          <Stack
-            alignItems="center"
-            direction="row"
-            justifyContent="space-between"
-            spacing={8}
-          >
-            <Stack width="100%">
-              <Stack alignItems="flex-start" direction="row">
-                <Stack flex="3">
-                  <Input
-                    name="giftTitle"
-                    placeholder="Regalo..."
-                    onChange={() => setGiftMessage("")}
-                  />
-                  <Text>{giftMessage}</Text>
-                </Stack>
-                <Stack flex="1">
-                  <Input name="giftQty" placeholder="Cantidad" type="number" />
-                </Stack>
-              </Stack>
-              <Stack alignItems="center" direction="row">
-                <Input name="imgSrc" placeholder="Link a la imagen..." />
-              </Stack>
-            </Stack>
-            <Button type="submit">Agregar</Button>
-          </Stack>
-        </form>
+        <Stack direction="row" justifyContent="space-around">
+          {gifts.length > 0 ? (
+            <Button onClick={handleDeteleAll}>Borrar todos los regalos</Button>
+          ) : null}
+          <FormModal
+            clearGiftInput={clearGiftInput}
+            giftMessage={giftMessage}
+            handleAddGift={handleAddGift}
+          />
+        </Stack>
       </Stack>
     </Stack>
   );

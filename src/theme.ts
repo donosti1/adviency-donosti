@@ -8,7 +8,7 @@ export default extendTheme({
         backgroundColor: "primary.500",
       },
       "*::placeholder": {
-        color: "white",
+        color: "black",
       },
     },
   },
@@ -46,10 +46,26 @@ export default extendTheme({
         },
       },
     },
+    Drawer: {
+      baseStyle: {
+        header: {
+          color: "black",
+        },
+        closeButton: {
+          bg: "gray.500",
+          _hover: { bg: "red.300" },
+        },
+      },
+    },
     Input: {
       parts: ["field"],
       defaultProps: {
-        focusBorderColor: "secondary.500",
+        focusBorderColor: "black",
+      },
+      baseStyle: {
+        field: {
+          color: "black",
+        },
       },
     },
     Modal: {
