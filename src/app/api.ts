@@ -1,4 +1,4 @@
-import { sampleGifts } from "./constants";
+import { sampleGifts, Users } from "./constants";
 
 export default {
   gifts: {
@@ -6,6 +6,11 @@ export default {
       const savedItems = localStorage.getItem("adviency");
 
       return savedItems ? JSON.parse(savedItems) : sampleGifts;
+    },
+  },
+  owners: {
+    list: () => {
+      Users;
     },
   },
 };

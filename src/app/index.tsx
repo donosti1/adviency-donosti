@@ -1,8 +1,17 @@
-import { Avatar, Button, Heading, Stack, Text, Input } from "@chakra-ui/react";
+import {
+  Avatar,
+  Button,
+  Heading,
+  Stack,
+  Text,
+  Input,
+  useRangeSlider,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import api from "./api";
 import FormModal from "./components/FormModal";
 import { Gift } from "./types";
+import { Users } from "./constants";
 
 function App() {
   const [gifts, setGifts] = useState(api.gifts.list);
@@ -35,10 +44,11 @@ function App() {
     }
     const giftQty = e.currentTarget.giftQty.value;
     const giftImgSrc = e.currentTarget.imgSrc.value;
-
+    const owner = e.currentTarget.owner.value;
     const newGift: Gift = {
       id: Date.now(),
       qty: Number(giftQty) < 1 ? 1 : Number(giftQty) > 6 ? 6 : Number(giftQty),
+      ownerId: Number(owner),
       title: giftTitle,
       imgSrc: giftImgSrc,
     };
@@ -116,7 +126,14 @@ function App() {
                         justifyContent="space-between"
                         width="100%"
                       >
-                        <Text>{gift.title}</Text>
+                        <Stack spacing={0}>
+                          <Text>{gift.title}</Text>
+                          <Text>
+                            {Users.filter((us) => {
+                              return us.value === gift.ownerId;
+                            }).map((us) => us.label)}
+                          </Text>
+                        </Stack>
                         <Text>(Qty: {gift.qty})</Text>
                       </Stack>
                     </Stack>

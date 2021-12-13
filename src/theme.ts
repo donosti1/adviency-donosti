@@ -82,6 +82,11 @@ export default extendTheme({
         },
       },
     },
+    Select: {
+      baseStyle: {
+        color: "black",
+      },
+    },
     Text: {
       baseStyle: {
         fontWeight: "700",
