@@ -1,5 +1,5 @@
 import { sampleGifts, Users } from "./constants";
-
+import { Gift } from "./types";
 export default {
   gifts: {
     list: () => {
@@ -11,7 +11,9 @@ export default {
       const savedItems = localStorage.getItem("adviency");
 
       if (savedItems) {
-        return JSON.parse(savedItems).filter((it: any) => console.log(it));
+        return JSON.parse(savedItems).filter((it: Gift) => it.id === id);
+      } else {
+        return sampleGifts.filter((it: Gift) => it.id === id);
       }
     },
   },

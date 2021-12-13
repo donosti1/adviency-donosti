@@ -61,6 +61,27 @@ function App() {
 
     return true;
   }
+  function handleEditGift(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const giftTitle = e.currentTarget.giftTitle.value;
+    const giftQty = e.currentTarget.giftQty.value;
+    const giftImgSrc = e.currentTarget.imgSrc.value;
+    const owner = e.currentTarget.owner.value;
+    const originalOwner = e.currentTarget.originalOwner.value;
+    const giftId = Number(e.currentTarget.giftId.value);
+
+    const updatedGift: Gift = {
+      id: giftId,
+      qty: Number(giftQty) < 1 ? 1 : Number(giftQty) > 6 ? 6 : Number(giftQty),
+      ownerId: owner != "" ? Number(owner) : Number(originalOwner),
+      title: giftTitle,
+      imgSrc: giftImgSrc,
+    };
+
+    setGifts(gifts.map((gi: Gift) => (gi.id === giftId ? updatedGift : gi)));
+
+    return true;
+  }
   useEffect(() => {
     if (gifts.length) {
       return localStorage.setItem("adviency", JSON.stringify(gifts));
@@ -93,7 +114,7 @@ function App() {
         spacing={4}
         width="container.sm"
       >
-        <Heading as="h1" textAlign="center">
+        <Heading as="h1" color="whiteAlpha.900" textAlign="center">
           Regalos
         </Heading>
         <Stack>
@@ -138,7 +159,10 @@ function App() {
                         <Text>(Qty: {gift.qty})</Text>
                       </Stack>
                     </Stack>
-                    <EditModal giftId={gift.id} />
+                    <EditModal
+                      giftId={gift.id}
+                      handleEditGift={handleEditGift}
+                    />
                     <Button
                       _hover={{ bg: "red.300" }}
                       onClick={() => handleDeteleItem(gift.id)}

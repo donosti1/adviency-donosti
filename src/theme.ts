@@ -71,7 +71,7 @@ export default extendTheme({
     Modal: {
       baseStyle: {
         dialog: {
-          bg: "whiteAlpha.900",
+          /* bg: "whiteAlpha.900", */
         },
         closeButton: {
           bg: "gray.500",
