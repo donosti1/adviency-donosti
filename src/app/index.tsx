@@ -12,6 +12,7 @@ import api from "./api";
 import FormModal from "./components/FormModal";
 import { Gift } from "./types";
 import { Users } from "./constants";
+import EditModal from "./components/EditModal";
 
 function App() {
   const [gifts, setGifts] = useState(api.gifts.list);
@@ -137,6 +138,7 @@ function App() {
                         <Text>(Qty: {gift.qty})</Text>
                       </Stack>
                     </Stack>
+                    <EditModal giftId={gift.id} />
                     <Button
                       _hover={{ bg: "red.300" }}
                       onClick={() => handleDeteleItem(gift.id)}
