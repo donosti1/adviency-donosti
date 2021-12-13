@@ -7,6 +7,13 @@ export default {
 
       return savedItems ? JSON.parse(savedItems) : sampleGifts;
     },
+    listById: (id: number) => {
+      const savedItems = localStorage.getItem("adviency");
+
+      if (savedItems) {
+        return JSON.parse(savedItems).filter((it: any) => console.log(it));
+      }
+    },
   },
   owners: {
     list: () => {

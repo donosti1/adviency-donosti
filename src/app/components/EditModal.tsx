@@ -9,11 +9,13 @@ import {
   ModalCloseButton,
   Text,
   useDisclosure,
+  Input,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useRef } from "react";
 
 export default function FormModal({ giftId }: { giftId: number }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const firstField = useRef(null);
 
   function handleEditSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -30,7 +32,16 @@ export default function FormModal({ giftId }: { giftId: number }) {
           <ModalCloseButton />
           <form onSubmit={handleEditSubmit}>
             <ModalBody>
-              <Text>{giftId}</Text>
+              <Input
+                ref={firstField}
+                name="giftTitle"
+                placeholder="Regalo..."
+                /* value={} */
+                /* onChange={props.clearGiftInput} */
+              />
+              {/* <Text color="secondary.300" paddingLeft={4}>
+                {props.giftMessage}
+              </Text> */}
             </ModalBody>
 
             <ModalFooter>
