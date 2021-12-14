@@ -40,7 +40,7 @@ export default function EditModal(props: IEditModal) {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Editar Regalo</ModalHeader>
           <ModalCloseButton />
           <form onSubmit={handleEditSubmit}>
             <ModalBody color="black">
