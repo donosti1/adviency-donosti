@@ -85,6 +85,9 @@ export default extendTheme({
     Select: {
       baseStyle: {
         color: "black",
+        field: {
+          focusBorderColor: "black",
+        },
       },
     },
     Text: {

@@ -26,6 +26,6 @@ export const sampleGifts: Gift[] = [
 export const Users: Owners[] = [
   { value: 1, label: "Donosti1" },
   { value: 2, label: "Goncy" },
-  { value: 3, label: "Khadri" },
-  { value: 4, label: "QArocito" },
+  { value: 3, label: "Kahdri" },
+  { value: 4, label: "Carolina" },
 ];

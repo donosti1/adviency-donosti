@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Button,
@@ -6,8 +7,10 @@ import {
   Text,
   Input,
   useRangeSlider,
+  Icon,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { BsTrashFill } from "react-icons/bs";
+
 import api from "./api";
 import FormModal from "./components/FormModal";
 import { Gift } from "./types";
@@ -167,7 +170,7 @@ function App() {
                       _hover={{ bg: "red.300" }}
                       onClick={() => handleDeteleItem(gift.id)}
                     >
-                      X
+                      <Icon as={BsTrashFill} />
                     </Button>
                   </Stack>
                 ))}
